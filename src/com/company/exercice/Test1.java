@@ -37,6 +37,11 @@ public class Test1 {
      * Donner moi la caractéristique spécial de la classe String ?
      * A quoi sert la classe StringBuilder ?
      * Citer moi deux manières de déclarer un tableau de String dont l'ordre est garantit lors des insertions des données.
+     * Expliquer moi les mots clés suivants : private, public, package, protected, default,
+     * super, this, abstract, interface, volatile, new, class, final, static, implements, extends, .map(var -> ...), .filter(var -> ...)
+     * .collect(), .stream()
+     * Quels est la signification entre List, Set, Map, ArrayList, HashSet, Hashmap, LinkedList ?
+     * A quoi sert le pattern Singleton, Factory et Builder ?
      */
 
     // Quel code vous semble le plus juste et pourquoi entre la method1 et method2 ?
@@ -78,6 +83,19 @@ public class Test1 {
             }
         }
     }
+
+    /**
+     * TEST
+     *
+     * A l'aide de quoi test-on unitairement son code Java ?
+     * Quel framework utilisé pour effectuer des tests unitaires et des tests d'intégration ?
+     * Quel est la différence entre test unitaire et test d'intégration ?
+     * Que signifie un Mock ?
+     * Comment s'assurer qu'un code est clean ?
+     * Quel sont les bonnes pratiques de codage ?
+     * A quoi sert un SONAR dans un Projet ?
+     */
+
     /**
      * Question base de données ?
      *
@@ -90,6 +108,21 @@ public class Test1 {
      * Quel est la différence entre varchar(255) et char(255)  ?
      */
 
+    /**
+     * Performance
+     *
+     * Que signIfie un code Scalable ?
+     * Que signifie haute disponibilité ?
+     */
+
+    /**
+     * DevOps
+     *
+     * Expliquer moi le devOps ?
+     * Citer moi une plate-forme d'intégration continue.
+     * Lorsqu'on développe une application web en Java (Projet Spring Boot). Que livre-t-on en production ?
+     *
+     */
 
     /**
      * Question Spring ?
@@ -98,12 +131,16 @@ public class Test1 {
      * A quoi sert les transactions avec Spring ?
      * Expliquer moi Spring MVC ?
      * Qu'est ce qu'un moteur de templating ?
-     *
+     * Quel est la différence entre un client lourd et un client léger ?
+     * Citer moi un framework pour réaliser un client lourd et un client léger.
      */
 
     /**
      * HTTP
      *
+     * Décrivez moi le protocole HTTP ?
+     * Que peut-contenir une entete http ?
+     * Quel est la version actuel de HTTP ?
      * Que signifie REST ?
      * Citer moi trois verbes REST et leurs signification ?
      * Citer moi les 3 codes d'erreurs HTTP les plus courant et leurs signification ?
@@ -119,8 +156,15 @@ public class Test1 {
      * Qu'est ce que GIT ?
      * A quoi sert le mot clé rebase ?
      * Citer moi trois commandes de base de git et leurs signification
+     * Quel est la différence entre GIT et SVN ?
      */
 
+    /**
+     * Maven
+     *
+     * Qu'est ce que Maven ?
+     * Expliquer le cycle de vie de Maven ?
+     */
 
     /**
      * Mini Projet Spring Boot

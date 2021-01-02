@@ -2,8 +2,6 @@ package com.company.exercice;
 
 public class Test1 {
 
-
-
     /**
      * Question Java
      *
@@ -19,6 +17,7 @@ public class Test1 {
      *
      * Peut-on forcer l'utilisation du garbage collector ? Si oui comment ?
      * Non, mais on peut appeler System.gc()
+     * Nous suggérons à la JVM d’exécuter le GC (on ne dit pas que le JVM le fait).
      *
      * A quoi sert la redéfinition de la classe equals ?
      * Par défaut elle compare les adresses mémoire des objets que l'on compare.
@@ -119,8 +118,11 @@ public class Test1 {
      * String[] result;
      *
      * Expliquer moi les mots clés suivants : private, public, package, protected, default,
-     * super, this, abstract, interface, volatile, new, class, final, static, implements, extends, .map(var -> ...), .filter(var -> ...)
-     * .collect(), .stream()
+     * super, this, abstract, interface, volatile, new, class, final, static, implements, extends,
+     * .map(var -> ...)
+     * .filter(var -> ...)
+     * .collect()
+     * .stream()
      * implements : pour une interface
      * extends : hritage
      * Quels est la signification entre  interface (List, Set, Map) et les implémentation( ArrayList, HashSet, Hashmap, LinkedList )?
@@ -132,11 +134,9 @@ public class Test1 {
      * A quoi sert le pattern Singleton et Factory  ?
      * Singleton : créer une instance unique
      * Factory : usine à fabrique permet de créer des objets selon le contexte voulu
-     */
+     * /
 
     // Quel code vous semble le plus juste et pourquoi entre la method1 et method2 ?
-
-
     public void method1(String user) {
         if("toto".equals(user)) {
             System.out.println("my name is toto");
@@ -247,13 +247,14 @@ public class Test1 {
      *
      * Que signifie plan d'execution ?
      * Quel est la différence entre JPA et Hibernate ?
-     * Quel est la différence entre varchar(255) et char(255)  ?
+     * Quel est la différence entre varchar(255) et char(255) ?
+     *
      */
 
     /**
      * Performance
      *
-     * Que signIfie un code Scalable ?
+     * Que signifie un code Scalable ?
      * Que signifie haute disponibilité ?
      */
 
@@ -300,6 +301,7 @@ public class Test1 {
      * Citer moi trois commandes de base de git et leurs signification
      * Quel est la différence entre GIT et SVN ?
      */
+
 
     /**
      * Maven

@@ -14,6 +14,7 @@ public class Test2 {
      * Retourner les utilisateurs qui ont plus de 30 ans
      */
     public static List<User> exercice1(List<User> users) {
+
         return null;
     }
 

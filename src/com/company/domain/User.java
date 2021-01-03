@@ -9,6 +9,7 @@ public class User {
     private LocalDate birthDate; // JAVA 8 => faciliter utilisation des dates year month jour
     private Civility civility;
 
+    private final  String HELLO = "hello";
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -21,6 +22,7 @@ public class User {
 
     @Override
     public String toString() {
+        HELLO = ""
         return "User{" +
                 "firstName='" + firstName + '\'' +
                 ", birthDate=" + birthDate +

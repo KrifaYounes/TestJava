@@ -6,65 +6,128 @@ public class Test1 {
      * Question Java
      *
      * Le langage Java est-il orienté Objet ? Si oui expliquer pourquoi
-     * il est orienté objet mais on peut des types primitifs comme int, long, char, double, float
+     * Il est orienté objet (on peut créer des classes avec des attributs et des méthodes et utiliser la notion d'héritage avec le mot clé extends)
+     * En Java on peut aussi utiliser des types primitifs comme int, long, char, double, float.
      *
      * Quel est la différence int et Integer ?
-     * int type primitif et Integer est une classe
-     * int est un type primitif est
+     * int est un type primitif alors que Integer est une classe
      *
      * A quoi sert le garbage collector ?
      * Il sert à libérer de la mémoire.
      *
      * Peut-on forcer l'utilisation du garbage collector ? Si oui comment ?
-     * Non, mais on peut appeler System.gc()
-     * Nous suggérons à la JVM d’exécuter le GC (on ne dit pas que le JVM le fait).
+     * Non on peut pas forcer l'utilisation du garbage collector, mais on peut appeler System.gc()
+     * (En appelant System.gc(), Nous suggérons à la JVM d’exécuter le GC (attention on ne dit pas que le JVM le fait) ).
      *
-     * A quoi sert la redéfinition de la classe equals ?
-     * Par défaut elle compare les adresses mémoire des objets que l'on compare.
-     * On la redéfinit pour comparer les attributs des objets que l'on souhaite
+     * A quoi sert la redéfinition de la méthode equals ?
+     * Par défaut la méthode equals compare les adresses mémoire des objets que l'on compare
+     * (exemple user.equals(user2) => on compare l'adresse mémoire des deux objets user et user2).
+     * En général on redéfinit la méthode equals pour comparer les attributs des objets que l'on souhaite.
+     * Exemple pour une classe User : on comparer les attributs firstName, birthDate et civility
+     *
+     *     @Override
+     *     public boolean equals(Object o) {
+     *         if (this == o) return true;
+     *         if (o == null || getClass() != o.getClass()) return false;
+     *         User user = (User) o;
+     *         return Objects.equals(firstName, user.firstName) &&
+     *                 Objects.equals(birthDate, user.birthDate) &&
+     *                 civility == user.civility;
+     *     }
      *
      * Quel est la différence entre equals et == ?
-     * equals = quand on la redéfinit elle le compare le contenu
-     * == elle compare l'adresse mémoire
+     * equals : par défaut equals compare l'adresse mémoire
+     * si on la redefinit equals compare le contenu entre deux objets (comparaison des attributs)
+     * == : compare l'adresse mémoire
      *
-     * A quoi sert la redéfinition de la classe hashcode ?
+     * A quoi sert la redéfinition de la méthode hashcode ?
      * elle permet de créer une clé de hachage unique pour chaque instance d'une classe.
+     * Utilisation de la méthode hashCode : cette méthode est utile pour chercher l'instance d'un objet dans un objet Map par exemple.
+     * A PARTIR DU hashCode on peut savoir si l'objet est contenu dans une Map ou pas.
+     * Il existe beaucoup de cas d'utilisation du hashCode voir cours.
      *
      * Citer moi trois nouveautés de Java 8 et leurs intérêts d'utilisation ?
      * - API Date/Time : LocalDate et LocalDateTime
      * - possibilité d'implémenter des méthodes dans une interface avec le mot clé default
-     * - les lambdas expressions : api stream, forEach
+     * Exempe :
+     * interface InterfaceName {
+     *  default void methodName(String parameter) {
+     *
+     *  }
+     * }
+     * - API stream : permet de parcourir une Collection
+     * - Les optional mot clé : Optional
      *
      * Quel est la différence entre une interface et une classe abstraite ?
-     * une interface peut hérité de plusieurs interface alors qu'une classe astraite
-     * possibilité de mettre des attributs dans une classe abstraite
+     * une interface peut hériter de plusieurs interface alors qu'une classe astraite
+     * possibilité de mettre des attributs dans une classe abstraite alors que c'est interdit dans une interface
+     * un classe abstraite doit contenir au moins une méthode abstraite
+     * une interface peut ne rien contenir (aucune méthode)
      *
      * Peut-on implémenter une méthode dans une interface ?
      * Oui avec le mot clé default (à partir de java 8)
      *
      * Que signifie qu'un code est thread safe ?
-     * code qui fonctionne correctement lorsqu'il est attaqué par plusieurs thread en même temps
+     * La thread safety d'un code (qu'on appelle alors « code thread-safe »)
+     * est la propriété de celui-ci associée au fait qu'il est capable de fonctionner correctement lorsqu'il est exécuté simultanément au sein du même espace d'adressage
+     * par plusieurs threads.
+     * Exemple :
      *
      * Qu'est ce qu'un objet immutable (immuable) ?
-     * objet qui ne peut pas changer de valeur
-     * utilisé le mot clé final pour rendre un objet immuable
+     * Objet qu'on ne peut pas modifier
+     * Exemple : private final static String HELLO = "Hello";
+     * La variable HELLO est immuable.
+     * On ne peut pas modifier la variable HELLO, le compilateur bloque la modification.
+     * Attention : Quand on fait private static String HELLO = "Hello";
+     * La variable HELLO est quand même immutable même si on utilise pas le mot clé final par contre on peut faire
+     * HELLO = "Bonjour"; car on fait HELLO = "Bonjour" cela signifie HELLO = new String("Bonjour"); la variable HELLO pointe vers une nouvelle adresse mémoire
      *
      * Est-ce que l'objet est String est immutable ?
      * Oui il est immutable.
      *
      * Qu'est ce qu'un Optional ?
+     * Un optional permet de rendre un code NullCheck
+     * Les optional nous permettent d'éviter des NullPointerException
+     * Exemple de NullPointerException :
+     * User user = userRepository.findInDatabase();
+     * user.equals(user2)
+     * si userRepository.findInDatabase retourne null on obtient une Exception : pour le rendre NullCheck
+     * Deux posibilités :
+     * 1ere possibilité : utilisé if (user != null)
+     *
+     * 2eme posibilité : utilisé le mot clé Optional
+     * Avec les optional
+     * Optional<User> userOptional = Optional.of(userRepository.findInDatabase());
+     * if(userOptional.isPresent()) {
+     *     User user = userOptional.get();
+     *     user.equals(user2);
+     * }
+     * on évite un nullPointerException si notre user est null
+     * Par contre si on fait  userOptional.get() sans avoir tester que  la condition userOptional.isPresent() est vrai on obtient une Exception.
+     * Avec les optional le développeur doit avoir toujours la reflexion de tester si l'objet est présent ou pas dans l'optional pour éviter les NullPointerException
+     * Sans les optional beaucoup de développeur oublie de tester if(user != null) du coup beaucoup d'exception se produissent à l'execution.
+     * Les optional sont un moyen de rendre un code NullCheck mais ne le garentisent pas si on oublie d'utiliser la méthode userOptional.isPresent()
+     *
+     *
+     * Que signigie NullCheck ?
+     * Cela signifie que notre code est garantit sans NullPointerException.
      *
      * A quoi sert le polymorphisme ?
+     * Principe d'utilisation de l'héritage voir cours
      *
      * A quoi sert l'héritage ? ( de quel type d'attribut une classe fille peut hérité d'une classe mére ? )
-     * ça sert à hériter des propriétés d'une classe mere (attribut et methdode)
-     * Attribut public et protected
+     * ça sert à hériter des propriétés d'une classe mére (attribut et methdode)
+     * Attribut et méthode public et protected
      *
      * Qu'est ce qu'un design pattern ?
-     * Patron de conception : concept en informatique qui nous permette de mieux architecturer notre application
+     * Patron de conception : concept en informatique qui nous permet de mieux architecturer notre application
      * par exemple : MVC et Singleton.
      * Singleton : permet de créer une instance unique d'une classe
-     * on utilise le mot clé synchronised pour mettre un vérrou sur la création de l'instance
+     * on utilise le mot clé synchronised pour mettre un vérrouillage sur la création de l'instance
+     * MVC : model view controller
+     * view : page html
+     * controller : s'occupe des traitements des actions de l'utilisateur ( exemple searchUser, createUser )
+     * model : contient les données qui vont être utilisé par la vue ( le model est rempli par le controller)
      *
      * Citer moi 3 design patterns ?
      * MVC :
@@ -74,9 +137,12 @@ public class Test1 {
      * Qu'est ce qu'un attribut statique ?
      * un attribut static est un attribut de classe
      * c'est un attribut partagé par toute les instances d'une classe
-     * exemple User user = new User();
-     * User user2 = User()
-     * public final static String value = "toto";
+     * exemple :
+     * public class User {}
+     *     public final static String value = "toto";
+     * }
+     * on peut accéder au contenu de l'attribut value sans créer d'instance de la classe User
+     * Exemple d'utilisation : System.out.println(User.value); // pas besoin de créer une instance de User user = new User(); pour accéder au contenu
      *
      * Que signifie super et this en Java ?
      * super pour appeler la classe mére
@@ -90,13 +156,15 @@ public class Test1 {
      *
      * method(user);
      * System.out.pring(user.getFirstName()); //affiche toto car passage par reference
+     *
      * public void method(User user) {
-     *    user = new User();
-     *    user.setBirthDate();
+     *    user.setFirstName("toto");
      * }
      *
      * Quelle est la différence entre JDK, JRE et JVM ?
-     * définition.
+     * voir cours.
+     * Java Development Kit : contient le JRE et la jVM
+     * JVM : java virtual machine
      *
      * Qu'est  ce qu'une énumeration en Java? Pourquoi les utiliser ?
      * Enumeration contient des valeurs prédéfinis
@@ -104,6 +172,25 @@ public class Test1 {
      * enum Civity {
      *     MONSIEUR, MADAME
      * }
+     * Une énumeration peut contenir des attributs.
+     * Exemple :
+     *
+     * enum Civity {
+     *      MONSIEUR("Monsieur", "Mister), MADAME("Madame", "Miss")
+     *      private String labelFR;
+     *      private String labelEN;
+     *      // constructeur privé
+     *      Civity(String labelFR, String labelEN) {
+     *          this.labelFR = labelFR;
+     *          this.labelEN = labelEN;
+     *      }
+     *
+     *      public String getLabelFR() {
+     *          return labelFR;
+     *      }
+     * }
+     *
+     * Quand on fait Civity.MONSIEUR.getLabelFR() cela retourne Monsieur
      *
      * Donner moi la caractéristique spécial de la classe String ?
      * Elle est immutable mais on peut faire. public String = "toto";  String = "tata";
@@ -117,22 +204,32 @@ public class Test1 {
      * List<String> result = new Arrays();
      * String[] result;
      *
-     * Expliquer moi les mots clés suivants : private, public, package, protected, default,
-     * super, this, abstract, interface, volatile, new, class, final, static, implements, extends,
+     * Expliquer moi les mots clés suivants : private, public, protected ( visibilité des méthodes et des attributs), package (nom du package),
+     * default ( extension java8 pour définir des implémentations de méthode dans une interface),
+     * super (pour appeler les propriétés ou méthodes d'une classe mére),
+     * this (pour appeler les propriétés ou méthodes de la classe courante),
+     * abstract (pour déclarer une classe abstraite ou méthode abstraite),
+     * interface, volatile, new, class,
+     * final (modificateur : permet de rendre immuable un attribut ou éviter la redefinition de méthode dans une classe fille)
+     * static (permet l'utilisatiob d'attribut ou méthode de classe : on peut appeler une méthode ou un attribut sans créer une instance)
+     * implements (pour les interfaces)
+     * extends (héritage protected et public méthode et attribut)
+     *
+     * lambda expressions :
      * .map(var -> ...)
      * .filter(var -> ...)
      * .collect()
      * .stream()
-     * implements : pour une interface
-     * extends : hritage
-     * Quels est la signification entre  interface (List, Set, Map) et les implémentation( ArrayList, HashSet, Hashmap, LinkedList )?
+
+     * Quels est la signification entre les interfaces (List, Set, Map) et les implémentation( ArrayList, HashSet, Hashmap, LinkedList )?
      * Différence entre List : interface
      * ArrayList : implémentation
      * LinkedList : implémentation
      * HashSet implémente Set
      * Hashmap implémente Map
+     *
      * A quoi sert le pattern Singleton et Factory  ?
-     * Singleton : créer une instance unique
+     * Singleton : créer une instance unique d'une classe
      * Factory : usine à fabrique permet de créer des objets selon le contexte voulu
      * /
 
@@ -149,7 +246,8 @@ public class Test1 {
         }
     }
 
-    // les deux sont les meme mais la method1 est plus juste car la method2 peut déclencher un NullPointerException
+    // les deux sont les meme mais la method1 est plus juste car la method2 peut déclencher un NullPointerException si user est null
+    // (toujours coder de la manière method1. cela réduit de + de 50% le nombre de NullPointerException)
 
     /**
      * Que va til se passer si on execute le code suivant ?
@@ -192,21 +290,26 @@ public class Test1 {
      *
      * Quel framework utilisé pour effectuer des tests unitaires et des tests d'intégration ?
      * Junit pour les tests unitaires
-     * Mockito ou Cucumber ou tests d'intégration.
+     * Framework Cucumber ou Junit pour les tests d'intégration.
      *
      * Quel est la différence entre test unitaire et test d'intégration ?
-     * Test unitaire : tester unitairement le comportement d'une méthode (public
+     * Test unitaire : tester unitairement le comportement d'une méthode spécifique
      * Test d'intégration : tester globalement le comportement de toutes une fonctionalité
      *
      * Que signifie un Mock ?
      *
      * Comment s'assurer qu'un code est clean ?
      * Mise en place d'une bonne architecture de conception
-     * Nommer correctement les méthodes et les classes
-     * Mise en place d'une politique de test et d'intégration du code
+     * Mettre en place une politque de nommage (Nommer correctement les méthodes et les classes)
+     * Eviter les duplications de code
+     * Mise en place d'une politique de test unitaire et d'intégration du code (tester son code à plus de 80%)
+     * Mettre en place un SONAR dans un projet pour vérifier que le code ne contient pas d'erreur critique
+     * Eviter de mettre + de 4 if ou 4 boucles for dans une seule méthode ( si une méthode contient + de 3 if cela veut dire que la méthode a été mal conçu)
      *
      * A quoi sert un SONAR dans un Projet ?
-     * SONAR : sert à détecter les erreurs dans un projet
+     * SONAR : sert à détecter les erreurs dans un projet et les mauvaises pratique de codage selon des rules que le développeur fixe
+     * Exemple : un développeur fixe une rules (pas + de 4 if dans une méthode)
+     * si une méthode contient + de 4 if le SONAR va remonter une alerte selon un niveau (severe, critique, non critique...)
      */
 
     /**
@@ -232,15 +335,16 @@ public class Test1 {
      * Jointure interne : Select produit.name from user join achat on user.id = achat.idUser join produit on produit.id = achat.idProduit where user.name = 'youssef';
      * Jointure externe : select produit.name from user join achat on user.id = achat.idUser right join produit on produit.id = achat.idProduit where user.name = 'youssef';
      *
-     * Comment optimiser les réponses d'une requête sql ?
+     * Comment optimiser les réponses d'une requête SQL ?
      * - voir si on peut créer des index
      * - voir si on peut transformer la requête en une vue
-     * - voir si on peut ajouter ou reduire des jointures ds la requête
-     * - ajouter des conditions obligatoires sur la requête
+     * - voir si on peut ajouter ou réduire des jointures ds la requête qui vont favoriser l'execution de la requete
+     * - ajouter des conditions obligatoires sur la requête pour remonter moins de données
+     * - voir si le model de données a bien été conçu sinon refaire le modele de données
      *
      * Quel est l'intérêt et le désavantage d'un index ?
      * - intérêt : raccourcir le temps d'execution d'une requete
-     * - désavantage : dans certains cas -----> mise ou jour / ou insertion devient un désavantage en écriture (écriture plus longue).
+     * - désavantage : dans certains cas -----> mise ou jour / ou insertion devient un désavantage (écriture plus longue).
      *
      * A quoi sert une vue ?
      * Sert à précaculer le résultat d'une requête
@@ -267,16 +371,6 @@ public class Test1 {
      *
      */
 
-    /**
-     * Question Spring ?
-     *
-     * A quoi sert Spring Core ?
-     * A quoi sert les transactions avec Spring ?
-     * Expliquer moi Spring MVC ?
-     * Qu'est ce qu'un moteur de templating ?
-     * Quel est la différence entre un client lourd et un client léger ?
-     * Citer moi un framework pour réaliser un client lourd et un client léger.
-     */
 
     /**
      * HTTP
@@ -292,6 +386,16 @@ public class Test1 {
      * Quels sont éléments les plus importants de la console de débugage de Chrome ?
      */
 
+    /**
+     * Question Spring ?
+     *
+     * A quoi sert Spring Core ?
+     * A quoi sert les transactions avec Spring ?
+     * Expliquer moi Spring MVC ?
+     * Qu'est ce qu'un moteur de templating ?
+     * Quel est la différence entre un client lourd et un client léger ?
+     * Citer moi un framework pour réaliser un client lourd et un client léger.
+     */
 
     /**
      * GIT (ligne de commande uniquement)

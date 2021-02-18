@@ -359,16 +359,21 @@ public class Test1 {
      * Performance
      *
      * Que signifie un code Scalable ?
-     * Que signifie haute disponibilité ?
+     * désigne la capacité d'un produit à s'adapter à un changement d'ordre de grandeur
+     * de la demande (montée en charge), en particulier sa capacité à maintenir ses fonctionnalités et ses performances en cas de forte demande2.
      */
 
     /**
      * DevOps
      *
-     * Expliquer moi le devOps ?
-     * Citer moi une plate-forme d'intégration continue.
-     * Lorsqu'on développe une application web en Java (Projet Spring Boot). Que livre-t-on en production ?
+     * Qu'est ce qu'une plateforme d'intégration continue.
+     * Environnement qui va s'occuper de lancer des tests unitaires, d'intégration et de livrer des binaires sur differents environnement (dev, test, pré-production et production)
      *
+     * Citer moi une plate-forme d'intégration continue.
+     * GitLab et Jenkins
+     *
+     * Lorsqu'on développe une application web en Java (Projet Spring Boot). Que livre-t-on en production ?
+     * Lorsqu'il s'agit d'un projet Spring Boot on livre un jar executable
      */
 
 
@@ -380,9 +385,22 @@ public class Test1 {
      * Quel est la version actuel de HTTP ?
      * Que signifie REST ?
      * Citer moi trois verbes REST et leurs signification ?
+     * POST
+     * PUT
+     * PATCH
+     * DELETE
+     *
      * Citer moi les 3 codes d'erreurs HTTP les plus courant et leurs signification ?
+     * 200
+     * 201
+     * 403
+     * 500
+     *
      * Comment lancer une requête http rapidement en ligne de commande ?
+     * curl -I http:// www.google.com
+     *
      * Quel est la différence entre le verbe POST et PUT ?
+     *
      * Quels sont éléments les plus importants de la console de débugage de Chrome ?
      */
 
@@ -394,16 +412,34 @@ public class Test1 {
      * Expliquer moi Spring MVC ?
      * Qu'est ce qu'un moteur de templating ?
      * Quel est la différence entre un client lourd et un client léger ?
+     * Client lourd : exemple Application Swing : sexecute sur le poste d'un ordinateur
+     * Client léger : exemple Application Spring MVC : sexecute dans un conteneur web
+     *
      * Citer moi un framework pour réaliser un client lourd et un client léger.
+     * client lourd : Framework Swing
+     * client léger : Spring mvc
      */
 
     /**
      * GIT (ligne de commande uniquement)
      *
      * Qu'est ce que GIT ?
-     * A quoi sert le mot clé rebase ?
+     * gestionnaire de code source decentralisé
+     *
+     * Quel site utilise le protocole git ?
+     * Gitlab, Github, Jira ....
+     *
      * Citer moi trois commandes de base de git et leurs signification
+     * git clone repositoryName (clone un répertoire distinct dans un répertoire)
+     * git pull (recupere les derniere modification)
+     * git checkout fileName
+     * git commit -m "message"
+     * git push
+     * git rebase master
+     *
      * Quel est la différence entre GIT et SVN ?
+     * git : gerer de façon decentraliser
+     * SVN : gerer de facon centraliser
      */
 
 
